@@ -54,9 +54,30 @@ function generatePassword(){
       window.alert("please select at least 1 character set")
     }
   } while(validationFailed);
+
   return makePassword(range, characters, numbers, lowercase, uppercase);
 }
 
+function makePassword(length, usecharacters, useNumbers, useLowercase, useUppercase){
+  let password = "";
+  var charset = "";
+  if(usecharacters === true){
+    charset += "!@#$%^&*()_+";
+  }
+  if(useUppercase === true){
+    charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  }
+  if(useLowercase === true){
+    charset += "abcdefghijklmnopqrstuvwxyz";
+  }
+  if(useNumbers === true){
+    charset += "0123456789";
+  }
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    password += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return password;
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
